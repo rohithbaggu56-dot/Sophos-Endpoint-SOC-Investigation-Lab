@@ -73,18 +73,16 @@ The detection provided additional endpoint context, including the process respon
 
 ---
 
-### 📊 Threat Graph Availability
+## 📊 Threat Graph Availability
 
-Not every Sophos detection generates a Threat Graph.
+Not every Sophos detection generated a Threat Graph during this investigation.
 
-During this investigation, the PUA detection was recorded in Sophos Central, but a Threat Graph was not generated for the event.
+The PUA test produced a detection in Sophos Central, but a Threat Graph was not generated for that event. This showed an important distinction between **detection visibility** and **Threat Graph availability**.
 
-This is expected behavior in some PUA detection scenarios. Sophos documentation specifically notes that **Deep Learning (ML) PUA detections do not create Threat Graphs**. Threat Graphs are primarily used when Sophos identifies malware that requires further investigation.
+A detection can still provide useful investigation data such as the detection rule, endpoint, process information, and other telemetry even when a Threat Graph is not available.
 
-This was an important part of the investigation because it showed that a **detection event and a Threat Graph are not the same thing**. A detection can still provide useful endpoint information even when a full threat graph is unavailable.
-
-> **Investigation note:** Threat Graph availability depends on the type and severity of the detection and the telemetry available for the event.
-
+> 🔎 **Investigation note:** Threat Graph availability can depend on the type of detection and the telemetry available for that event. Therefore, the absence of a Threat Graph does not mean that Sophos failed to detect the activity.
+> 
 ---
 
 ### 4. Detection Lineage
