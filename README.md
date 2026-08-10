@@ -20,15 +20,15 @@ Rather than treating Sophos as only an endpoint antivirus product, I explored ho
 
 The lab focused on:
 
-- 🔍 Endpoint threat detection
-- 🌐 Web protection
-- 🧪 Controlled security testing
-- 👥 Active Directory identity context
-- 📊 Detection investigation
-- 🌳 Process Lineage
-- 🚨 Alerts and attack-level visibility
-- 🧹 Threat remediation
-- ☁️ Centralized investigation through Sophos Central
+- Endpoint threat detection
+- Web protection
+- Controlled security testing
+- Active Directory identity context
+- Detection investigation
+- Process Lineage
+- Alerts and attack-level visibility
+- Threat remediation
+- Centralized investigation through Sophos Central
 
 ---
 
@@ -62,14 +62,14 @@ One of the biggest things I learned was that **a security platform is not just a
 
 For example, a detection can provide information such as:
 
-- 🖥️ Affected endpoint
-- 👤 User associated with the activity
-- ⚙️ Process information
-- 📁 File information
-- 🔗 Parent/child process relationships
-- 🔍 Detection rule
-- 🧬 Process Lineage
-- 🧹 Remediation status
+- Affected endpoint
+- User associated with the activity
+- Process information
+- File information
+- Parent/child process relationships
+- Detection rule
+- Process Lineage
+- Remediation status
 
 This helped me look at endpoint security more from an **investigation and SOC workflow perspective** rather than simply asking whether something was detected.
 
@@ -130,23 +130,17 @@ That distinction became much clearer while working with Sophos Central.
 
 ---
 
-## 👥 Identity Context with Active Directory
+## 👥 Identity & Active Directory Context
 
-The lab also included an Active Directory environment with domain users and groups.
+The lab included an Active Directory environment with domain users and groups that were synchronized with Sophos Central using AD Sync.
 
-Active Directory was synchronized with Sophos Central so that endpoint activity could be viewed alongside organizational identity information.
+The Windows endpoint was associated with the domain environment, allowing user and group information to appear alongside endpoint security activity.
 
-This added an important SOC perspective:
+For the controlled investigations, activity was performed under domain-user accounts within the lab environment. This allowed the investigations to consider both the affected endpoint and the user associated with the activity.
 
-**Endpoint → User → Detection → Investigation**
+The synchronized users and groups can be seen in Sophos Central.
 
-Instead of investigating an endpoint as an isolated machine, the analyst can also consider the user associated with the activity.
-
-The synchronized users and groups can be seen in Sophos Central:
-
-![Sophos Central Users & Groups](Images/sophos-ad-users.png)
-
-This was particularly useful for understanding how endpoint security and identity context can complement each other during an investigation.
+![Sophos Central Users & Groups](Images/Sophos-AD-Sync-Configuration.png)
 
 ---
 
@@ -282,7 +276,7 @@ rather than looking at an individual security notification in isolation.
 
 ---
 
-## 🧠 Conclusion
+## ✅ Conclusion
 
 This project gave me a practical understanding of how Sophos approaches endpoint security and SOC investigations.
 
@@ -293,21 +287,3 @@ Instead of focusing only on whether Sophos could detect a test file, I explored 
 Working through multiple controlled scenarios also helped me understand the difference between endpoint telemetry, detections, alerts, and broader attack-level visibility.
 
 Most importantly, comparing Sophos with my previous CrowdStrike Falcon work helped me understand that learning an EDR platform is not just about learning where the buttons are. It is about understanding **how the platform represents security activity and how an analyst can use that information to investigate an incident.**
-
----
-
-## 🛠️ Technologies & Concepts
-
-- 🛡️ Sophos Endpoint
-- ☁️ Sophos Central
-- 🔍 Threat Analysis Center
-- 🌐 Web Protection
-- 🚨 Endpoint Detection
-- 🌳 Process Lineage
-- 📊 Detection Telemetry
-- 👥 Active Directory
-- 🔄 AD Sync
-- 🪟 Windows 10
-- 🖥️ Windows Server
-- 🧪 Controlled Security Testing
-- 🔎 SOC Investigation Workflow
