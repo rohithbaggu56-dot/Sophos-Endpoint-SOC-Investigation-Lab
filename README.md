@@ -12,23 +12,13 @@ This project was built to go beyond simply generating detections. The goal was t
 
 ---
 
-## 🎯 Lab Objective
+## 🎯 Lab Objective & Scope
 
 The objective of this lab was to understand the Sophos security workflow from an analyst's perspective.
 
 Rather than treating Sophos as only an endpoint antivirus product, I explored how its different security capabilities work together during an investigation.
 
-The lab focused on:
-
-- Endpoint threat detection
-- Web protection
-- Controlled security testing
-- Active Directory identity context
-- Detection investigation
-- Process Lineage
-- Alerts and attack-level visibility
-- Threat remediation
-- Centralized investigation through Sophos Central
+The lab covered endpoint protection, web protection, Active Directory identity context, detection investigation, Process Lineage, remediation, and broader attack-level visibility through Sophos Central.
 
 ---
 
@@ -36,17 +26,33 @@ The lab focused on:
 
 ![Sophos Endpoint SOC Lab Architecture](Images/sophos-lab-architecture.png)
 
+## 🧰 Tools & Technologies
+
+| Category | Used |
+|---|---|
+| Endpoint Security | Sophos Endpoint |
+| Security Platform | Sophos Central |
+| Identity | Active Directory, AD Sync |
+| Endpoint | Windows 10 |
+| Testing | Controlled security test files and scenarios |
+
 ---
+## 🔎 Investigation Approach
 
-## 🧪 Investigation Approach
+The investigations followed a simple SOC-oriented workflow:
 
-The lab used controlled security test files and scenarios on a Windows 10 endpoint protected by Sophos Endpoint.
+**Test Activity → Protection → Detection → Investigation → Process Context → Remediation**
 
-The activity was then investigated through Sophos Central to understand what was detected, what telemetry was available, how the endpoint activity could be traced, and how Sophos responded to the activity.
+Rather than stopping at the initial detection, I reviewed the available evidence in Sophos Central to understand:
 
-The investigations are documented separately in the repositories below.
+- What activity occurred
+- Which endpoint and user were involved
+- What Sophos detected
+- What process or file was associated with the activity
+- What investigation telemetry was available
+- What protection or remediation action occurred
 
----
+The exact investigation path varied depending on the activity and the telemetry available for that event.
 
 ## 🧠 What I Learned About Sophos
 
@@ -66,7 +72,6 @@ For example, a detection can provide information such as:
 - User associated with the activity
 - Process information
 - File information
-- Parent/child process relationships
 - Detection rule
 - Process Lineage
 - Remediation status
@@ -95,7 +100,7 @@ The experience helped me understand that different EDR/XDR platforms may achieve
 
 ## 🔎 Events, Alerts, Detections & Cases
 
-One of the useful concepts I explored during this lab was the difference between several types of security information presented within a security platform.
+One of the concepts I explored during the lab was how Sophos separates different types of security information within Sophos Central.
 
 | Concept | Purpose |
 |---|---|
@@ -148,15 +153,15 @@ The synchronized users and groups can be seen in Sophos Central.
 
 During the lab, I also tested Sophos' **Critical Attack Warning** capability using a controlled security test scenario.
 
-When the test triggered the feature, Sophos Central presented a prominent **"You're under attack"** warning and provided an attack-level view rather than presenting the activity as only an individual endpoint detection.
+When triggered, Sophos Central presented an **"You're under attack"** warning and provided an attack-level view rather than showing the activity only as an individual endpoint detection.
 
 ![Sophos Critical Attack Warning](Images/sophos-critical-attack-warning.png)
 
-The corresponding Attack Details view provided additional context about the affected device, user, threat, severity, and other available information.
+The corresponding **Attack Details** view provided additional context about the affected device, user, threat, severity, and available investigation information.
 
 ![Sophos Attack Details](Images/sophos-attack-details.png)
 
-This was useful for understanding the difference between investigating an individual detection and viewing a broader security incident at the environment level.
+This helped me understand the difference between investigating an individual endpoint detection and viewing a broader security event at the environment level.
 
 ---
 
@@ -184,106 +189,81 @@ The purpose was not simply to trigger a detection, but to investigate the eviden
 
 ## 📂 Investigation Portfolio
 
-The main project is divided into focused investigations. Each investigation documents a specific security scenario and the evidence collected during the investigation.
+The project is divided into three focused investigations. Each investigation documents a specific security scenario and the evidence available through Sophos Central.
 
-### 1️⃣ EICAR Web Protection Investigation
+<details>
+<summary><strong>🔬 Investigation 01 — EICAR Web Protection</strong></summary>
 
-**Focus:** Web Protection, Endpoint Detection and Threat Remediation
+**Focus:** Web Protection, Endpoint Detection & Threat Remediation
 
 A controlled EICAR test was used to observe how Sophos handled a known security test file accessed through the web.
 
-The investigation follows the activity from web access through Sophos protection, detection, investigation telemetry, and remediation.
+The investigation followed the activity from web access and protection through endpoint detection and remediation.
 
-👉 **[View Investigation 01](./Investigation-01-EICAR-Web-and-Endpoint-Protection/)**
+➡️ **[View Investigation 01](./Investigation-01-EICAR-Web-and-Endpoint-Detection)**
 
----
+</details>
 
-### 2️⃣ PUA Detection Investigation
+<details>
+<summary><strong>🛡️ Investigation 02 — PUA Detection</strong></summary>
 
-**Focus:** Potentially Unwanted Application Detection and Endpoint Investigation
+**Focus:** Potentially Unwanted Application Detection & Endpoint Investigation
 
-This investigation explored how Sophos identified a PUA-related test activity and what investigation data was available through Sophos Central.
+This investigation examined how Sophos identified a PUA-related test activity and what investigation telemetry was available through Sophos Central.
 
 The investigation also examined Process Lineage and the difference between detection visibility and Threat Graph availability.
 
-👉 **[View Investigation 02](./Investigation-02-PUA-Detection/)**
+➡️ **[View Investigation 02](./Investigation-02-PUA-Detection)**
 
----
+</details>
 
-### 3️⃣ DOCM Web Protection & Detection Investigation
+<details>
+<summary><strong>🌐 Investigation 03 — DOCM Web Protection & Detection</strong></summary>
 
-**Focus:** Web Protection, Detection Telemetry, Process Lineage and Remediation
+**Focus:** Web Protection, Endpoint Detection, Process Lineage & Remediation
 
 A controlled DOCM test scenario was used to observe how Sophos handled web-based access to potentially dangerous test content.
 
 The investigation examined the relationship between Web Protection, Endpoint Detection, Detection Details, Process Lineage, and remediation.
 
-👉 **[View Investigation 03](./Investigation-03-DOCM-Web-Protection-and-Detection/)**
+➡️ **[View Investigation 03](./Investigation-03-DOCM-Web-Protection-and-Detection)**
+
+</details>
 
 ---
 
 ## 🌳 Threat Graph Availability
 
-One important observation across the investigations was that **not every Sophos detection generated a Threat Graph**.
+Not every Sophos detection generated a Threat Graph during the lab.
 
-Some detections provided detailed investigation information such as detection metadata, process information, and Process Lineage without providing a Threat Graph view.
+Some detections provided useful investigation data such as detection metadata, process information, and Process Lineage without providing a Threat Graph.
 
-This was an important distinction during the lab:
-
-**No Threat Graph ≠ No Detection**
-
-The available investigation data depends on the type of detection and the telemetry associated with the event.
-
-Where Process Lineage was available, it was used to understand the process activity surrounding the detection.
+This was an important observation: **the absence of a Threat Graph does not mean the activity was not detected.** The investigation view depends on the detection and telemetry available for that event.
 
 ---
 
 ## 💡 Key Takeaways
 
-This lab changed how I think about endpoint security platforms.
-
-### 🔹 1. Detection is only the beginning
-
-A detection tells an analyst that something security-relevant happened. The investigation requires additional context to understand what happened and whether further action is necessary.
-
-### 🔹 2. Context matters
-
-Process information, user identity, file information, lineage, and endpoint details can make a detection much more useful for investigation.
-
-### 🔹 3. Protection happens at multiple stages
-
-Sophos demonstrated different protection layers during the lab, including Web Protection, Endpoint Protection, detection, and remediation.
-
-### 🔹 4. Different platforms investigate differently
-
-Comparing Sophos with my previous CrowdStrike Falcon lab helped me understand that EDR platforms can provide similar security capabilities while presenting telemetry and investigations in different ways.
-
-### 🔹 5. Identity adds investigation context
-
-Integrating Active Directory helped connect endpoint activity with users and groups instead of viewing the endpoint as an isolated asset.
-
-### 🔹 6. Not every detection has the same investigation views
-
-Process Lineage and Threat Graph availability can differ depending on the detection and available telemetry.
-
-### 🔹 7. SOC analysis is about connecting the evidence
-
-The most valuable part of the lab was learning to connect:
-
-**User + Endpoint + Activity + Detection + Process Context + Response**
-
-rather than looking at an individual security notification in isolation.
+- **Detection is only the beginning** — investigation requires additional context to understand what happened.
+- **Context matters** — process, user, file, endpoint, and lineage information make detections more useful.
+- **Protection happens at multiple stages** — Sophos can combine web protection, endpoint protection, detection, and remediation.
+- **Different platforms investigate differently** — working with Sophos after Falcon helped me understand that similar EDR capabilities can be presented very differently.
+- **SOC analysis is about connecting evidence** — the useful question is not only what was detected, but what happened, who was involved, what evidence exists, and what response followed.
 
 ---
 
 ## ✅ Conclusion
 
-This project gave me a practical understanding of how Sophos approaches endpoint security and SOC investigations.
+This project helped me understand Sophos not simply as an endpoint protection product, but as a platform for connecting protection, detection, investigation, identity, and response.
 
-Instead of focusing only on whether Sophos could detect a test file, I explored how the platform:
+The lab also showed me how investigation workflows can differ between security platforms. Working through these scenarios helped me focus less on whether an alert appeared and more on the evidence available to understand the activity and determine what happened.
 
-**Protects → Detects → Provides Context → Supports Investigation → Responds**
+---
 
-Working through multiple controlled scenarios also helped me understand the difference between endpoint telemetry, detections, alerts, and broader attack-level visibility.
+## 🔙 Explore More Projects
 
-Most importantly, comparing Sophos with my previous CrowdStrike Falcon work helped me understand that learning an EDR platform is not just about learning where the buttons are. It is about understanding **how the platform represents security activity and how an analyst can use that information to investigate an incident.**
+Interested in more cybersecurity projects?
+
+Return to my main GitHub portfolio to explore additional investigations, home lab projects, SIEM implementations, and technical documentation.
+
+➡️ **[Back to Main Portfolio](https://github.com/rohithbaggu56-dot)**
