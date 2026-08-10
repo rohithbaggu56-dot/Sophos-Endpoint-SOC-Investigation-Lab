@@ -2,16 +2,17 @@
 
 A controlled endpoint security investigation using the **EICAR antivirus test file** to examine how Sophos protects a Windows endpoint and provides investigation visibility through Sophos Central.
 
-> ⚠️ EICAR is a harmless industry-standard antivirus test file used to validate security products. It is not real malware.
+> ⚠️ Lab Disclaimer:
+This investigation was performed in an isolated lab environment using the harmless EICAR antivirus test file. No real malware was used.
 
 
 ## 🎯 Objective
 
-The objective of this investigation was to understand how **Sophos Endpoint** protects a Windows endpoint against a controlled malware test and how the resulting security event can be investigated through **Sophos Central**.
+The objective of this investigation was to understand how **Sophos Endpoint** protects a Windows endpoint and how Sophos Central supports the detection and investigation of a security event.
 
-The investigation focused on understanding Sophos **Web Protection, endpoint detection, process lineage, and Threat Graph analysis** by using the harmless EICAR test file.
+Using the harmless EICAR antivirus test file, the investigation explored Sophos **Web Protection, Endpoint Detection, Process Lineage, and Threat Graph** to understand how different security controls contribute to detection and investigation.
 
-The test was not simply to confirm that Sophos could detect EICAR, but to understand the **security controls involved, the telemetry they generate, and how an analyst can investigate the resulting event**.
+The goal was not simply to verify that Sophos could detect EICAR, but to understand **how the protection layers respond, what telemetry they provide, and how an analyst can investigate the resulting event in Sophos Central.**
 
 ---
 
@@ -102,14 +103,8 @@ The graph identified the EICAR test file with a **bad reputation / likely malwar
 
 ## ✅ Conclusion
 
-The EICAR test demonstrated a layered endpoint protection workflow:
+The EICAR test demonstrated how Sophos can provide a layered endpoint protection and investigation workflow:
 
 **Web Protection → Endpoint Detection → Process Investigation → Threat Graph Analysis**
 
-The test provided a practical view of how a security event can be detected and investigated through Sophos Central rather than simply confirming that an antivirus product can detect a test file.
-
----
-
-### 🔐 Lab Disclaimer
-
-This investigation was performed in an isolated lab environment using the harmless EICAR antivirus test file. No real malware was used.
+The investigation showed that Sophos Central provides more than a simple detection result. It provides security telemetry and investigation context that can help an analyst understand what happened, how the activity was connected, and what response options are available.
