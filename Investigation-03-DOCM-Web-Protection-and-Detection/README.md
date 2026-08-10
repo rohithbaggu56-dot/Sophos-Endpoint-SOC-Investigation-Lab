@@ -1,4 +1,4 @@
-# Investigation 03 — DOCM Web Protection & Detection
+# 🛡️ Investigation 03 — DOCM Web Protection & Detection
 
 A controlled endpoint security investigation using a DOCM security test file to understand how Sophos Web Protection and Sophos Endpoint respond to potentially malicious web-based content and how the resulting activity appears within Sophos Central.
 
@@ -10,7 +10,7 @@ A controlled endpoint security investigation using a DOCM security test file to 
 
 ## 🎯 Objective
 
-The objective of this investigation was to understand how Sophos handles a DOCM test file accessed through a web-based source and how the resulting security activity is represented within Sophos Central.
+The objective of this investigation was to understand how Sophos handles a DOCM test file accessed through a web-based source and how the resulting activity is detected and represented within Sophos Central.
 
 The investigation focused on Sophos Web Protection, endpoint threat detection, endpoint telemetry, and process lineage to understand how multiple protection and investigation capabilities responded to the same controlled security test.
 
@@ -139,6 +139,6 @@ The workflow observed during the investigation was:
 
 **Web Protection → Endpoint Detection → Endpoint Telemetry → Process Lineage → Remediation**
 
-The test provided a practical view of how Sophos combines prevention, detection, investigation visibility, and remediation within Sophos Central.
+The investigation provided a practical view of how Sophos combines prevention, detection, investigation visibility, and remediation within Sophos Central.
 
 It also demonstrated that the investigation information available to an analyst can vary between detections, with Process Lineage providing useful context in this case even though a Threat Graph was not generated.
