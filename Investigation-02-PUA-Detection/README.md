@@ -87,11 +87,11 @@ This was an important part of the investigation because it showed that a **detec
 
 ---
 
-### 4. Process Lineage
+### 4. Detection Lineage
 
-The detection was investigated through Sophos process lineage to understand the activity surrounding the event.
+The detection's Lineage view was reviewed to understand the process and file activity associated with the PUA event.
 
-The lineage showed the browser process and related activity associated with the PUA test, providing additional context for investigating how the detection was triggered.
+The lineage showed `msedge.exe` accessing the AMTSO test content and provided additional context around the activity that triggered the detection.
 
 ![Sophos PUA Process Lineage](Images/04-Sophos-PUA-Process-Lineage.png)
 
