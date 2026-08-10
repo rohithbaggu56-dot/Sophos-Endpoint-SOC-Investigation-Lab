@@ -117,7 +117,7 @@ The lineage showed `msedge.exe` accessing the AMTSO test content and provided ad
 
 ---
 
-## 🧠 Conclusion
+## ✅ Conclusion
 
 This investigation demonstrated how Sophos approaches **PUA protection and endpoint investigation**.
 
