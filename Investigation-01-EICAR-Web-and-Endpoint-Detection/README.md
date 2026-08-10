@@ -2,9 +2,11 @@
 
 A controlled endpoint security investigation using the **EICAR antivirus test file** to examine how Sophos protects a Windows endpoint and provides investigation visibility through Sophos Central.
 
-> ⚠️ Lab Disclaimer:
-This investigation was performed in an isolated lab environment using the harmless EICAR antivirus test file. No real malware was used.
+> ⚠️ **Lab Disclaimer**
+> 
+>This investigation was performed in an isolated lab environment using the harmless EICAR antivirus test file. No real malware was used.
 
+---
 
 ## 🎯 Objective
 
