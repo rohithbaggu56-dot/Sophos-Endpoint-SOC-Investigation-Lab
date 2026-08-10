@@ -165,28 +165,6 @@ This helped me understand the difference between investigating an individual end
 
 ---
 
-## 🔍 Investigation Workflow
-
-Across the investigations, I followed a practical SOC-style workflow:
-
-**Test Activity → Protection → Detection → Investigation → Process Context → Remediation**
-
-The exact investigation path varied depending on the type of activity.
-
-For example:
-
-**Web-based Test**
-
-Web Access → Web Protection → Endpoint Detection → Process Lineage → Remediation
-
-**Endpoint Test**
-
-Test File / Activity → Endpoint Detection → Detection Details → Process Lineage → Remediation
-
-The purpose was not simply to trigger a detection, but to investigate the evidence available after the detection occurred.
-
----
-
 ## 📂 Investigation Portfolio
 
 The project is divided into three focused investigations. Each investigation documents a specific security scenario and the evidence available through Sophos Central.
