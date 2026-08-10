@@ -1,10 +1,10 @@
 # 🛡️ Sophos Endpoint SOC Investigation Lab
 
-![Sophos](https://img.shields.io/badge/Sophos-Endpoint-0A5CA8?style=for-the-badge&logo=sophos&logoColor=white)
-![Windows](https://img.shields.io/badge/Windows-Endpoint-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-![Active Directory](https://img.shields.io/badge/Active%20Directory-Lab-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)
-![SOC](https://img.shields.io/badge/SOC-Investigation-111827?style=for-the-badge)
-![Threat Analysis](https://img.shields.io/badge/Threat-Analysis-7C3AED?style=for-the-badge)
+![Sophos](https://img.shields.io/badge/SOPHOS-SECURITY-0A4D8C?style=for-the-badge)
+![Windows](https://img.shields.io/badge/WINDOWS-ENDPOINT-0078D4?style=for-the-badge)
+![Active Directory](https://img.shields.io/badge/ACTIVE%20DIRECTORY-LAB-555555?style=for-the-badge)
+![SOC Investigation](https://img.shields.io/badge/SOC-INVESTIGATION-2F6FED?style=for-the-badge)
+![Threat Analysis](https://img.shields.io/badge/THREAT-ANALYSIS-7B2CBF?style=for-the-badge)
 
 A practical security investigation lab focused on understanding how **Sophos Endpoint and Sophos Central** detect, investigate, and respond to suspicious activity on Windows endpoints.
 
