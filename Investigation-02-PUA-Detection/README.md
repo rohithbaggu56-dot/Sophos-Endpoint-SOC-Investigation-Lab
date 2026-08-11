@@ -10,11 +10,11 @@ A controlled endpoint security investigation using the AMTSO Potentially Unwante
 
 ## 🎯 Objective
 
-The objective of this investigation was to understand how **Sophos Endpoint** handles Potentially Unwanted Applications (PUAs) and how the resulting security activity can be investigated through **Sophos Central**.
+The objective of this investigation was to understand how Sophos Endpoint handles Potentially Unwanted Applications (PUAs) and how the resulting security activity can be investigated through Sophos Central.
 
-The investigation focused on Sophos **Web Protection, PUA detection, process lineage, and endpoint telemetry** to understand how Sophos identifies potentially unwanted content and provides investigation context to a security analyst.
+The investigation focused on Sophos Web Protection, PUA detection, endpoint telemetry, and Process Lineage to understand what evidence was available during the investigation.
 
-The goal was not simply to confirm that Sophos could detect a PUA test, but to understand **how the protection controls respond and what information is available for investigating the event**.
+The goal was not simply to confirm that Sophos could detect a PUA test, but to understand how the protection controls responded and what information was available to an analyst after the event.
 
 ---
 
@@ -34,33 +34,32 @@ The goal was not simply to confirm that Sophos could detect a PUA test, but to u
 
 ### 1. AMTSO PUA Test
 
-The AMTSO Potentially Unwanted Application test page was accessed from the protected Windows endpoint.
+The AMTSO Potentially Unwanted Application test page was accessed from the protected Windows endpoint. The test was used to safely validate whether Sophos could identify and protect against potentially unwanted application activity.
 
-The test is designed to safely verify whether endpoint security software is configured to detect potentially unwanted applications.
-
-Sophos Endpoint generated security notifications when the PUA test was accessed/downloaded.
+Sophos generated security notifications when the PUA test activity was accessed/downloaded.
 
 ![AMTSO PUA Test](Images/01-AMTSO-PUA-Sophos-Web-Protection.png)
+*AMTSO PUA test activity generated Sophos security notifications on the protected endpoint.*
 
 ---
 
 ### 2. Sophos Web Protection
 
-Sophos Web Protection blocked access to the PUA test content.
+Sophos Web Protection blocked access to the PUA test content. The browser displayed an Access Denied page, indicating that the requested content was blocked by the configured protection policy before the test content could be successfully delivered to the endpoint.
 
-The browser displayed an **Access denied** page indicating that the organization had blocked the requested site under its configured threat protection policy.
+This demonstrated that protection occurred at the web access stage, before the test content could proceed further.
 
 ![Sophos Web Protection Blocking PUA](Images/02-Sophos-Web-Protection-PUA-Blocked.png)
 
-This demonstrated that protection can occur at the web access stage, before the test content is successfully delivered to the endpoint.
+*Sophos Web Protection blocked access to the PUA test content.*
 
 ---
 
 ### 3. Sophos Central Detection
 
-Sophos Central recorded the activity as an endpoint threat detection.
+Sophos Central recorded the activity as an endpoint detection.
 
-**Detection observed:**
+**Detection evidence:**
 
 - **Detection:** `WIN-PROT-WEB-MALWARE-APP-EICAR-PUA`
 - **Severity:** Medium
@@ -70,28 +69,45 @@ Sophos Central recorded the activity as an endpoint threat detection.
 The detection provided additional endpoint context, including the process responsible for accessing the test content.
 
 ![Sophos Central PUA Detection](Images/03-Sophos-Central-PUA-Detection.png)
+*Sophos Central generated an endpoint detection associated with the PUA test activity.*
 
 ---
-
 ## 📊 Threat Graph Availability
 
-Not every Sophos detection generated a Threat Graph during this investigation.
+A Threat Graph was not generated for this PUA detection.
 
-The PUA test produced a detection in Sophos Central, but a Threat Graph was not generated for that event. This showed an important distinction between **detection visibility** and **Threat Graph availability**.
+This was an important investigation finding because detection visibility and Threat Graph availability are not the same thing.
 
-A detection can still provide useful investigation data such as the detection rule, endpoint, process information, and other telemetry even when a Threat Graph is not available.
+The detection still provided useful investigation data, including the detection rule, affected endpoint, process information, and other available telemetry.
 
-> 🔎 **Investigation note:** Threat Graph availability can depend on the type of detection and the telemetry available for that event. Therefore, the absence of a Threat Graph does not mean that Sophos failed to detect the activity.
-> 
+📌 **Investigation note:** The absence of a Threat Graph does not mean the activity was not detected. Threat Graph availability can vary depending on the detection type and the telemetry available for that event.
+
 ---
 
 ### 4. Detection Lineage
 
 The detection's Lineage view was reviewed to understand the process and file activity associated with the PUA event.
 
-The lineage showed `msedge.exe` accessing the AMTSO test content and provided additional context around the activity that triggered the detection.
+The Lineage showed `msedge.exe` accessing the AMTSO test content and provided additional context around the activity that triggered the detection.
+
+**Analyst purpose:** The goal was to determine how the detected activity originated and what process context was available for further investigation.
 
 ![Sophos PUA Process Lineage](Images/04-Sophos-PUA-Process-Lineage.png)
+*Process Lineage provided additional context around the browser process associated with the PUA detection.*
+
+---
+
+## 🧠 Analyst Assessment
+
+The evidence showed a clear progression from the attempted access to the PUA test content through web protection, endpoint detection, and process investigation.
+
+**Investigation context:**
+
+> PUA test activity → Web Protection blocked access → Endpoint Detection generated → Process Lineage provided process context
+
+The activity was expected test activity performed in a controlled lab environment. The investigation therefore focused on validating how Sophos identified, recorded, and exposed the activity for analyst investigation rather than treating the event as a real-world malicious incident.
+
+A Threat Graph was not available for this detection, but the available detection and Lineage data still provided sufficient context to understand the activity and the process involved.
 
 ---
 
@@ -99,30 +115,28 @@ The lineage showed `msedge.exe` accessing the AMTSO test content and provided ad
 
 | Control | What was observed |
 |---|---|
-| **Web Protection** | Blocked access to the PUA test content |
-| **PUA Detection** | Sophos generated a PUA-related endpoint detection |
-| **Endpoint Telemetry** | Captured the browser process and related activity |
-| **Process Lineage** | Provided context around the activity that triggered the detection |
-| **Sophos Central** | Centralized the detection and investigation information |
+| Web Protection | Blocked access to the PUA test content |
+| PUA Detection | Generated a PUA-related endpoint detection |
+| Endpoint Telemetry | Captured the browser process and related activity |
+| Process Lineage | Provided context around the activity that triggered the detection |
+| Sophos Central | Centralized the detection and investigation information |
 
 ---
 
 ## 💡 Key Takeaways
 
-- Sophos can identify **Potentially Unwanted Applications** separately from conventional malware detections.
-- Web Protection can prevent access to potentially unwanted or suspicious content before it is successfully delivered.
-- Sophos Central provides endpoint telemetry that helps an analyst investigate the detection.
-- Process lineage adds useful context around the activity associated with a security event.
-- The investigation showed how multiple protection and visibility capabilities can work together instead of relying on a single detection mechanism.
-
+- A PUA detection can provide useful investigation context even when a Threat Graph is not available.
+- Web Protection and endpoint detection provided different pieces of evidence around the same activity.
+- Process Lineage helped connect the detection to the browser activity that triggered it.
+- 
 ---
 
 ## ✅ Conclusion
 
-This investigation demonstrated how Sophos approaches **PUA protection and endpoint investigation**.
+This investigation demonstrated how Sophos handled a controlled PUA test across web protection, endpoint detection, and process investigation.
 
 The workflow observed during the test was:
 
 **Web Protection → PUA Detection → Endpoint Telemetry → Process Lineage → Investigation**
 
-Rather than simply confirming that a test file was detected, the investigation helped demonstrate how Sophos protects the endpoint and provides an analyst with additional context for understanding the event.
+The investigation also showed that not every detection provides the same investigation views. In this case, Process Lineage was available while a Threat Graph was not. The main takeaway was that useful investigation context can still be available even when a specific investigation view is unavailable.
