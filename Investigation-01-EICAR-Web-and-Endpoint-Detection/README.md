@@ -1,6 +1,6 @@
 # 🛡️ Investigation 01 — EICAR Web & Endpoint Detection
 
-A controlled endpoint security investigation using the **EICAR antivirus test file** to examine how Sophos protects a Windows endpoint and provides investigation visibility through Sophos Central.
+A controlled endpoint security investigation using the EICAR antivirus test file to examine how Sophos protects a Windows endpoint and how the resulting activity can be investigated through Sophos Central.
 
 > ⚠️ **Lab Disclaimer**
 > 
@@ -31,82 +31,98 @@ The goal was not simply to verify that Sophos could detect EICAR, but to underst
 
 ## 🔎 Investigation
 
-### 1. Web Protection
+The investigation followed the activity through the security telemetry available in Sophos Central, starting with the initial web protection event and then examining the related endpoint detection and investigation context.
+
+### 1. Initial Activity — Web Protection
 
 The EICAR test file was accessed from the protected Windows endpoint.
 
-Sophos Web Protection blocked access to the file and displayed:
+Sophos Web Protection blocked access to the test content before it could be successfully accessed by the endpoint.
 
-> **Access denied — Restricted file type**
-
-The event demonstrated that Sophos can prevent potentially dangerous file types from being accessed through the web before they are successfully downloaded to the endpoint.
+**Evidence observed:**
+- Web Protection blocked the requested content
+- The activity was identified as a restricted file type
+- The event provided the initial indication that protection had been triggered
 
 ![Sophos Web Protection](Images/01-AMTSO-EICAR-Sophos-Web-Protection.png)
+*Sophos Web Protection blocked access to the EICAR test content.*
 
----
+### 2. Endpoint Detection
 
-### 2. Sophos Central Detection
+The same test activity generated an endpoint detection in Sophos Central.
 
-Sophos Central recorded the activity as an endpoint threat detection.
+The detection provided additional context around the activity, including the affected Windows endpoint, detection details, process information, and severity.
 
-**Detection observed:**
-
-- **Detection:** `WIN-PROT-WEB-MALWARE-EICAR-AV-TEST`
-- **Severity:** Medium
-- **Process:** `msedge.exe`
-- **Endpoint:** Windows 10
+**Evidence observed:**
+- Endpoint: Windows 10
+- Process: `msedge.exe`
+- Detection severity: Medium
+- Detection details associated with the EICAR test activity
 
 ![Sophos Central EICAR Detection](Images/02-Sophos-Central-EICAR-Detection.png)
-
----
+*Sophos Central generated an endpoint detection associated with the EICAR test activity.*
 
 ### 3. Process Lineage
 
-The detection was investigated through Sophos process lineage to understand the activity surrounding the event.
+I then reviewed Process Lineage to understand the process context surrounding the detection rather than stopping at the detection itself.
 
-The lineage showed the browser activity and the associated EICAR file activity, providing additional context about how the detection occurred.
+The lineage view provided additional context about the browser process and the activity associated with the detected event.
+
+**Analyst purpose:**
+
+The goal here was to determine how the detected activity originated and what process context was available for further investigation.
 
 ![Sophos EICAR Process Lineage](Images/03-Sophos-EICAR-Process-Lineage.png)
-
----
+*Process Lineage provided additional context around the browser process associated with the detection.*
 
 ### 4. Threat Graph
 
-The detection was opened in Sophos Threat Graph to investigate the event in greater detail.
+The detection was also reviewed in Sophos Threat Graph to examine the activity in a broader investigation view.
 
-The graph identified the EICAR test file with a **bad reputation / likely malware** classification and provided additional file information and response options.
+Threat Graph provided additional context around the detected activity and exposed further information and available response options.
 
 ![Sophos EICAR Threat Graph](Images/04-Sophos-EICAR-Threat-Graph.png)
+*Threat Graph provided a broader view of the detected activity and related investigation context.*
 
 ---
 
-## 🛡️ Security Controls Demonstrated
+## 🧠 Analyst Assessment
 
-| Control | What was observed |
-|---|---|
-| Web Protection | Blocked access to the restricted EICAR file |
-| Endpoint Detection | Generated a detection in Sophos Central |
-| Process Lineage | Provided context around the browser and file activity |
-| Threat Graph | Connected the detection with additional file and process context |
-| Threat Response | Sophos provided response options for the detected threat |
+The evidence showed a clear progression from the initial web activity to endpoint detection and investigation telemetry.
+
+**Investigation chain:**
+
+> EICAR test content accessed → Web Protection blocked the activity → Endpoint detection generated → Process Lineage provided process context → Threat Graph provided broader investigation context
+
+The activity was expected test behavior using the EICAR security test file in a controlled lab environment.
+
+The investigation therefore focused on validating how Sophos detected, recorded, and exposed the activity for analyst investigation rather than treating the event as a real malware infection.
+
+---
+
+## 🛡️ Protection and Investigation Layers
+
+| Layer | Evidence from the investigation | Analyst value |
+|---|---|---|
+| Web Protection | Access to the EICAR test content was blocked | Shows prevention at the web layer |
+| Endpoint Detection | Sophos generated a detection for the activity | Provides an investigation starting point |
+| Process Lineage | Process activity and browser context were available | Helps understand how the activity originated |
+| Threat Graph | Related activity was presented in a broader investigation view | Provides additional context for analysis |
+| Response | Available response options were exposed in the investigation workflow | Supports analyst decision-making |
 
 ---
 
 ## 💡 Key Takeaways
 
-- Sophos can provide protection at multiple stages of a web-based file event.
-- Web Protection can prevent access to restricted or potentially dangerous content.
-- Sophos Central provides centralized visibility into endpoint detections.
-- Process lineage helps investigate how an event originated.
-- Threat Graph provides additional context for understanding and investigating a detection.
-- The investigation showed how prevention and endpoint telemetry can work together rather than relying on a single security control.
+- A detection is the starting point of an investigation, not the end.
+- Process context and related telemetry are important for understanding what actually happened.
+- Multiple security layers can provide different pieces of evidence around the same activity.
 
 ---
-
 ## ✅ Conclusion
 
-The EICAR test demonstrated how Sophos can provide a layered endpoint protection and investigation workflow:
+This investigation demonstrated how a single controlled test activity could be followed across multiple Sophos security layers:
 
-**Web Protection → Endpoint Detection → Process Investigation → Threat Graph Analysis**
+**Web Protection → Endpoint Detection → Process Investigation → Threat Graph**
 
-The investigation showed that Sophos Central provides more than a simple detection result. It provides security telemetry and investigation context that can help an analyst understand what happened, how the activity was connected, and what response options are available.
+The main takeaway was that an endpoint investigation should not stop at the initial detection. The surrounding telemetry provides the context needed to understand what happened, how the activity originated, and what response options are available to the analyst.
