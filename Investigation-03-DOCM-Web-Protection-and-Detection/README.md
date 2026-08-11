@@ -41,7 +41,7 @@ The goal was not simply to confirm that Sophos blocked or detected the test file
 
 The `CEPlus.docm` test file was accessed from the Cyber Essentials security testing repository.
 
-The test was performed to observe how Sophos handled the file during a web-based access attempt and what security telemetry was generated on the endpoint.
+The test was performed to observe how Sophos handled the file during a web-based access attempt and what security telemetry was generated as a result.
 
 ![DOCM Test File Source](Images/01-test-file-source.png)
 *The screenshot shows the test file being accessed from the security testing repository, providing the starting point for the investigation.*
@@ -70,7 +70,7 @@ The detection provided additional endpoint context, including:
 - **Process:** `msedge.exe`
 - **Endpoint:** Windows 10
 
-The detection details also provided information such as the process path, process command line, parent process information, SHA-256, and the source file path.
+The detection details included process path, process command line, parent process information, SHA-256, and source file path.
 
 ![Sophos Central Detection](Images/03-sophos-detection.png)
 *The detection provided the investigation starting point and additional endpoint telemetry for understanding the activity.*
@@ -83,7 +83,7 @@ A Threat Graph was not generated for this DOCM-related detection.
 
 Sophos still provided useful investigation data through the detection details and Process Lineage, allowing the associated process activity to be reviewed.
 
-This showed that Threat Graph availability can vary between detections and that the absence of a Threat Graph does not mean that useful investigation telemetry is unavailable.
+This showed that the absence of a Threat Graph does not prevent investigation when other endpoint telemetry is available.
 
 > 🔎 **Investigation note:** In this case, Process Lineage provided additional investigation context even though a Threat Graph was not available.
 
@@ -91,8 +91,7 @@ This showed that Threat Graph availability can vary between detections and that 
 
 ### 4. Detection Lineage
 
-The detection's Process Lineage view was reviewed to understand the process activity associated with the event.
-The Process Lineage showed the sequence of processes associated with the detected activity and provided additional context beyond the initial detection.
+The detection's Process Lineage view was reviewed to understand how the activity originated and what processes were associated with the event.
 
 ![Sophos Detection Process Lineage](Images/04-Process-lineage.png)
 *The lineage was useful for moving beyond the detection itself and examining the process context associated with the event.*
@@ -102,7 +101,7 @@ The Process Lineage showed the sequence of processes associated with the detecte
 
 ## 🧠 Analyst Assessment
 
-The evidence showed a clear progression from the attempted access to the DOCM test content through web protection, endpoint detection, process telemetry, and remediation.
+The evidence showed a clear progression from the attempted DOCM access through web protection, endpoint detection, process telemetry, and remediation.
 
 **Investigation context:**
 
