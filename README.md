@@ -64,7 +64,7 @@ Working with Sophos helped me understand a broader workflow:
 
 Sophos Central acts as the central point where endpoint activity, detections, alerts, investigation data, and response actions can be viewed together.
 
-One of the biggest things I learned was that **a security platform is not just about detecting a file or process**. The investigation context around that activity is equally important to an analyst.
+One of the biggest things I learned was that endpoint security is not just about detecting a file or process. The investigation context around that activity is equally important to an analyst.
 
 For example, a detection can provide information such as:
 
@@ -84,8 +84,7 @@ This helped me look at endpoint security more from an **investigation and SOC wo
 
 I had previously worked with **CrowdStrike Falcon**, so using Sophos gave me a useful opportunity to compare how two endpoint security platforms present security activity.
 
-The biggest difference I noticed was not simply whether a threat was detected, but **how the platforms organize and expose the investigation data**.
-
+The biggest difference I noticed was not simply whether a threat was detected, but **how each platform organizes and presents the investigation data**.
 With Falcon, I explored endpoint detections and investigated activity generated through controlled techniques such as PowerShell, scheduled tasks, and credential-access testing.
 
 With Sophos, I spent more time exploring the relationship between:
@@ -214,25 +213,25 @@ The investigation examined the relationship between Web Protection, Endpoint Det
 
 Not every Sophos detection generated a Threat Graph during the lab.
 
-Some detections provided useful investigation data such as detection metadata, process information, and Process Lineage without providing a Threat Graph.
+- Some detections still provided useful investigation data through detection metadata, process information, and Process Lineage without a Threat Graph.
 
-This was an important observation: **the absence of a Threat Graph does not mean the activity was not detected.** The investigation view depends on the detection and telemetry available for that event.
+- This was an important observation: the absence of a Threat Graph does not mean the activity was not detected or that investigation cannot continue.
 
 ---
 
 ## 💡 Key Takeaways
 
-- **Detection is only the beginning** — investigation requires additional context to understand what happened.
-- **Context matters** — process, user, file, endpoint, and lineage information make detections more useful.
-- **Protection happens at multiple stages** — Sophos can combine web protection, endpoint protection, detection, and remediation.
-- **Different platforms investigate differently** — working with Sophos after Falcon helped me understand that similar EDR capabilities can be presented very differently.
-- **SOC analysis is about connecting evidence** — the useful question is not only what was detected, but what happened, who was involved, what evidence exists, and what response followed.
-
+- Detection is only the beginning — investigation requires additional context to understand what happened.
+- Context matters — process, user, file, endpoint, and detection information make investigations more useful.
+- Protection happens at multiple stages — Sophos can combine web protection, endpoint protection, detection, and remediation.
+- Different platforms investigate differently — working with Sophos helped me understand that similar EDR capabilities can be presented in different ways.
+- SOC analysis is about connecting evidence — the question is not only what was detected, but what happened, what evidence exists, and what response followed.
+  
 ---
 
 ## ✅ Conclusion
 
-This project helped me understand Sophos not simply as an endpoint protection product, but as a platform for connecting protection, detection, investigation, identity, and response.
+This project helped me understand Sophos not simply as an endpoint protection product, but as a security platform that connects protection, detection, investigation, identity, and response.
 
 The lab also showed me how investigation workflows can differ between security platforms. Working through these scenarios helped me focus less on whether an alert appeared and more on the evidence available to understand the activity and determine what happened.
 
