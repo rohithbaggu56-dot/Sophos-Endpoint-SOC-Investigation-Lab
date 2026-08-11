@@ -10,11 +10,17 @@ A controlled endpoint security investigation using a DOCM security test file to 
 
 ## 🎯 Objective
 
-The objective of this investigation was to understand how Sophos handles a DOCM test file accessed through a web-based source and how the resulting activity is detected and represented within Sophos Central.
+The objective of this investigation was to understand how Sophos handles a DOCM test file accessed through a web-based source and how the resulting activity is detected and investigated through Sophos Central.
 
-The investigation focused on Sophos Web Protection, endpoint threat detection, endpoint telemetry, and process lineage to understand how multiple protection and investigation capabilities responded to the same controlled security test.
+The investigation focused on:
 
-The goal was not simply to confirm that Sophos blocked or detected the test content, but to understand how Sophos layered its protection mechanisms and what investigation context was available to an analyst.
+- Sophos Web Protection
+- Endpoint detection and telemetry
+- Process Lineage
+- Detection and investigation context
+- Remediation of the detected activity
+
+The goal was not simply to confirm that Sophos blocked or detected the test file, but to understand how the available security controls contributed to the investigation and what evidence was available to an analyst.
 
 ---
 
@@ -35,27 +41,25 @@ The goal was not simply to confirm that Sophos blocked or detected the test cont
 
 The `CEPlus.docm` test file was accessed from the Cyber Essentials security testing repository.
 
-The test was performed to observe how Sophos handled the attempted web-based access and what security controls were triggered during the activity.
+The test was performed to observe how Sophos handled the file during a web-based access attempt and what security telemetry was generated on the endpoint.
 
 ![DOCM Test File Source](Images/01-test-file-source.png)
+*The screenshot shows the test file being accessed from the security testing repository, providing the starting point for the investigation.*
 
 ---
 
 ### 2. Sophos Web Protection
 
 Sophos Web Protection blocked access to the DOCM test content during the web-based access attempt.
-
-The browser displayed an **Access denied** page indicating that the requested content was blocked under the configured Sophos threat protection policy.
-
-The same evidence also shows a Sophos Endpoint notification indicating that the detected threat activity was cleaned up.
+The browser displayed an access-denied response, while Sophos Endpoint also reported the detected activity and subsequent cleanup.
 
 ![Sophos Web Protection Block and Threat Cleanup](Images/02-web-protection-block-and-cleanup.png)
-
-This demonstrated that Sophos could intervene at the web-access stage while also providing endpoint protection and remediation when the test activity was detected.
+*The evidence confirmed that protection occurred at the web-access stage before the test content could be successfully delivered.*
 
 ---
 
 ### 3. Sophos Central Detection
+
 
 Sophos Central recorded the activity as an endpoint threat detection.
 
@@ -69,41 +73,46 @@ The detection provided additional endpoint context, including:
 The detection details also provided information such as the process path, process command line, parent process information, SHA-256, and the source file path.
 
 ![Sophos Central Detection](Images/03-sophos-detection.png)
-
-This provided a centralized view of the security event and the endpoint activity associated with the detection.
+*The detection provided the investigation starting point and additional endpoint telemetry for understanding the activity.*
 
 ---
 
-## 📊 Threat Graph Availability
+### 📊 Threat Graph Availability
 
 A Threat Graph was not generated for this DOCM-related detection.
 
-Sophos still provided investigation data through the detection details and **Process Lineage** view. The lineage information was used to examine the process activity associated with the detected content and understand the execution context.
+Sophos still provided useful investigation data through the detection details and Process Lineage, allowing the associated process activity to be reviewed.
 
-This investigation showed that **Threat Graph availability and detection visibility are not the same thing**. A detection can provide useful telemetry and investigation context even when a Threat Graph is not available.
+This showed that Threat Graph availability can vary between detections and that the absence of a Threat Graph does not mean that useful investigation telemetry is unavailable.
 
-> 🔎 **Investigation note:** The absence of a Threat Graph does not indicate that Sophos failed to detect the activity. In this case, the available Process Lineage view provided the relevant investigation context.
+> 🔎 **Investigation note:** In this case, Process Lineage provided additional investigation context even though a Threat Graph was not available.
 
 ---
 
 ### 4. Detection Lineage
 
-The detection's **Lineage** view was reviewed to understand the process activity associated with the event.
-
-The lineage showed the sequence of processes leading to the detected activity and provided additional endpoint context around the process responsible for accessing the test content.
+The detection's Process Lineage view was reviewed to understand the process activity associated with the event.
+The Process Lineage showed the sequence of processes associated with the detected activity and provided additional context beyond the initial detection.
 
 ![Sophos Detection Process Lineage](Images/04-Process-lineage.png)
-The lineage was useful for moving beyond the detection itself and examining the process context associated with the event.
+*The lineage was useful for moving beyond the detection itself and examining the process context associated with the event.*
+
 
 ---
 
-## 5. Investigation Findings
+## 🧠 Analyst Assessment
 
-The investigation showed that Sophos provided multiple layers of protection during the DOCM test.
+The evidence showed a clear progression from the attempted access to the DOCM test content through web protection, endpoint detection, process telemetry, and remediation.
 
-The attempted access to the test content was blocked by Sophos Web Protection, while Sophos Endpoint generated detection telemetry for the related activity.
+**Investigation context:**
 
-The available detection and Process Lineage information provided additional context for reviewing the event and understanding the associated process activity.
+DOCM test activity → Web Protection blocked access → Endpoint Detection generated → Process Lineage provided process context → Remediation completed
+
+The activity was expected test activity performed in a controlled lab environment. The investigation therefore focused on validating how Sophos identified the activity, what evidence was available to an analyst, and how the endpoint responded.
+
+The detection provided additional context such as the affected endpoint, process information, process path, command-line information, and file-related details. Process Lineage then helped connect the detection to the process activity associated with the event.
+
+A Threat Graph was not available for this detection. However, the available detection details and Process Lineage still provided useful investigation context.
 
 ---
 
@@ -116,29 +125,26 @@ The available detection and Process Lineage information provided additional cont
 | Endpoint Telemetry | Captured process and related activity associated with the detection |
 | Process Lineage | Provided additional context around the detected activity |
 | Sophos Central | Centralized detection and investigation information |
-| Remediation | Sophos cleaned up the detected threat activity |
+| Remediation | Sophos cleaned up the detected test activity |
 
 ---
 
 ## 💡 Key Takeaways
 
-- Sophos Web Protection can block access to suspicious or security-testing content before it is successfully delivered.
-- Endpoint detection can provide additional visibility when related activity is observed on the endpoint.
-- Process Lineage can help an analyst understand the process context associated with a detection.
-- A Threat Graph is not necessarily available for every detection; available investigation views can vary by event.
-- Sophos Central brings protection and investigation information together in a centralized workflow.
-- The investigation demonstrated how multiple protection and visibility capabilities can work together rather than relying on a single security mechanism.
-
+- Web Protection can prevent access to suspicious or security-testing content before it is successfully delivered.
+- Endpoint detection and telemetry provide additional context around activity observed on the endpoint.
+- Process Lineage can help an analyst understand the process activity associated with a detection.
+- Investigation visibility can vary between detections; in this case, Process Lineage was available while a Threat Graph was not.
+  
 ---
 
 ## ✅ Conclusion
 
-This investigation demonstrated how Sophos handled a controlled DOCM-based web protection test.
+This investigation demonstrated how Sophos handled a controlled DOCM-based security test across multiple protection and investigation layers.
 
 The workflow observed during the investigation was:
 
 **Web Protection → Endpoint Detection → Endpoint Telemetry → Process Lineage → Remediation**
 
-The investigation provided a practical view of how Sophos combines prevention, detection, investigation visibility, and remediation within Sophos Central.
-
-It also demonstrated that the investigation information available to an analyst can vary between detections, with Process Lineage providing useful context in this case even though a Threat Graph was not generated.
+The investigation showed that the initial web protection event could be followed by endpoint detection and additional process context in Sophos Central. It also reinforced that investigation visibility can vary between detections. In this case, Process Lineage was available even though a Threat Graph was not.
+Overall, the test helped demonstrate how Sophos connects prevention, detection, investigation context, and response within a centralized workflow.
