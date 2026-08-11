@@ -88,7 +88,7 @@ Threat Graph provided additional context around the detected activity and expose
 
 ## 🧠 Analyst Assessment
 
-The evidence showed a clear progression from the initial web activity to endpoint detection and investigation telemetry.
+The evidence showed a clear progression from the attempted web access to endpoint detection and additional investigation telemetry.
 
 **Investigation chain:**
 
