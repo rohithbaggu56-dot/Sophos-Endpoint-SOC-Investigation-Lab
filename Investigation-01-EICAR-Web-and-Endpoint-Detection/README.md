@@ -92,7 +92,7 @@ The evidence showed a clear progression from the initial web activity to endpoin
 
 **Investigation chain:**
 
-> EICAR test content accessed → Web Protection blocked the activity → Endpoint detection generated → Process Lineage provided process context → Threat Graph provided broader investigation context
+> EICAR test content access was attempted → Web Protection blocked the activity → Endpoint Detection generated → Process Lineage provided process context → Threat Graph provided broader investigation context
 
 The activity was expected test behavior using the EICAR security test file in a controlled lab environment.
 
